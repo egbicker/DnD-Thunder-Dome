@@ -1,0 +1,58 @@
+{
+    "name": "Tiamat",
+    
+    "initiativeModifier": 0,
+    
+    "armorClass" : 25,
+    
+    "hitPoints" : {
+        "diceCode" : "30d20 + 300",
+        "method" : "average"
+        },
+        
+    "speed" : {
+        "units" : "feet",
+        "types": {
+            "normal" : 60,
+            "flying" : 120
+            }
+        },
+        
+    "abilities" : {
+         "type"   : "scores",
+         "values" : {
+            "strength"     : 30,
+            "dexterity"    : 10,
+            "constitution" : 30,
+            "intelligence" : 26,
+            "wisdom"       : 26,
+            "charisma"     : 28
+            }
+        },
+        
+    "conditionAttributes" : {
+        "blinded"       : "Immune",
+        "charmed"       : "Immune",
+        "deafened"      : "Immune",
+        "frightened"    : "Immune",
+        "poisoned"      : "Immune",
+        "stunned"       : "Immune"
+        },
+        
+    "damageAttributes" : {
+        "acid"          : "Immune",
+        "cold"          : "Immune",
+        "fire"          : "Immune",
+        "lightning"     : "Immune",
+        "poison"        : "Immune",
+        "slashing"      : {
+            "nonmagic":"Immune"
+            },
+        "bludgeoning" : {
+            "nonmagic":"Immune"
+            },
+        "piercing"    : {
+            "nonmagic":"Immune"
+            }
+        }
+}
