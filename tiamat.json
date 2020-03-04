@@ -1,36 +1,44 @@
 {
     "name": "Tiamat",
     
-    "initiativeModifier": 0,
+    "armor_class" : 25,
     
-    "armorClass" : 25,
+    "initiative_modifier": 0,
     
-    "hitPoints" : {
-        "diceCode" : "30d20 + 300",
+    "armor_class" : 25,
+    
+    "hit_points" : {
+        "value" : "30d20 + 300",
         "method" : "average"
         },
         
-    "speed" : {
-        "units" : "feet",
-        "types": {
-            "normal" : 60,
-            "flying" : 120
-            }
-        },
+    "movement" : {
+            "land" : 60,
+            "fly" : 120
+            },
         
-    "abilities" : {
-         "type"   : "scores",
-         "values" : {
+    "att_scores" : {
             "strength"     : 30,
             "dexterity"    : 10,
             "constitution" : 30,
             "intelligence" : 26,
             "wisdom"       : 26,
             "charisma"     : 28
-            }
         },
         
-    "conditionAttributes" : {
+    "save_mod" : {
+            "strength"     : 19,
+            "dexterity"    : 9,
+            "wisdom"       : 17,
+        },
+    
+    "skills" : {
+            "arcana" : 17,
+            "perception" : 26,
+            "religion" : 17
+        },
+    
+    "condition_attributes" : {
         "blinded"       : "Immune",
         "charmed"       : "Immune",
         "deafened"      : "Immune",
@@ -39,7 +47,7 @@
         "stunned"       : "Immune"
         },
         
-    "damageAttributes" : {
+    "damage_attributes" : {
         "acid"          : "Immune",
         "cold"          : "Immune",
         "fire"          : "Immune",
