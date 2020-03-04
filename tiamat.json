@@ -1,5 +1,8 @@
 {
     "name": "Tiamat",
+    "size": "gargantuan",
+    "stock": "fiend",
+    "alignment" : "CE",
     
     "armor_class" : 25,
     
@@ -29,7 +32,7 @@
     "save_mod" : {
             "strength"     : 19,
             "dexterity"    : 9,
-            "wisdom"       : 17,
+            "wisdom"       : 17
         },
     
     "skills" : {
@@ -38,6 +41,17 @@
             "religion" : 17
         },
     
+    "damage" : {
+        "acid"          : 0,
+        "cold"          : 0,
+        "fire"          : 0,
+        "lightning"     : 0,
+        "poison"        : 0,
+        "slashing_nm"   : 0,
+        "bludgeoning_nm" : 0,
+        "piercing_nm"    : 0
+        },   
+    
     "condition_attributes" : {
         "blinded"       : "Immune",
         "charmed"       : "Immune",
@@ -45,22 +59,7 @@
         "frightened"    : "Immune",
         "poisoned"      : "Immune",
         "stunned"       : "Immune"
-        },
-        
-    "damage_attributes" : {
-        "acid"          : "Immune",
-        "cold"          : "Immune",
-        "fire"          : "Immune",
-        "lightning"     : "Immune",
-        "poison"        : "Immune",
-        "slashing"      : {
-            "nonmagic":"Immune"
-            },
-        "bludgeoning" : {
-            "nonmagic":"Immune"
-            },
-        "piercing"    : {
-            "nonmagic":"Immune"
-            }
         }
+        
+
 }

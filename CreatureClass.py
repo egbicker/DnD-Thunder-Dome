@@ -10,6 +10,13 @@ class Creature:
         # - Name, string
         
         #Optional Inputs:
+        #- size: string. Default to Medium
+        #    - tiny, small, medium, large, huge, gargantuan
+        #- stock: string. Default to humanoid
+        #    - abberation, beast, celestial, construct, dragon, elemental, fey,
+        #    - fiend, giant, humanoid, monstrosity, ooze, plant, swarm, undead
+        #- alignment: string. Default to N
+        #   - LG, NG, CG, LN, N, CN, LE, NE, CE
         #- initiative_modifier: int, Defaults to DEX mod if not specified
         #- armor_class: int, Defaults to 10 if not specified
         #- hit_points: dict
@@ -50,6 +57,12 @@ class Creature:
                         #TODO: Break if the name is empty
                         #TODO: Deal with uniquness in naming (the 17 kobold load problem)
                         name = [],
+                        
+                        size = 'medium',
+                        
+                        stock = 'humanoid',
+                        
+                        alignment = 'N',
                         
                         #Initiative modifier
                         #Default to empty, default to dex-mod if not input 
@@ -109,20 +122,23 @@ class Creature:
                         #Since these are mutually exclusive, I'm categorizing by damage type
                         #Instead of by the 4 types with all damage listed under each
                 
-                        #Initialize all damage types to Neutral
+                        #Initialize all damage types to 1 (Neutral)
                         damage = dict(
                                            acid        = 1,
-                                           bludgeoning = 1,
+                                           bludgeoning_m  = 1,
+                                           bludgeoning_nm = 1,
                                            cold        = 1,
                                            fire        = 1,
                                            force       = 1,
                                            lightning   = 1,
                                            necrotic    = 1,
-                                           piercing    = 1,
+                                           piercing_m    = 1,
+                                           piercing_nm   = 1,
                                            poison      = 1,
                                            psychic     = 1, 
                                            radiant     = 1,
-                                           slashing    = 1,
+                                           slashing_m    = 1,
+                                           slashing_nm   = 1,
                                            thunder     = 1),
 
 
@@ -159,7 +175,11 @@ class Creature:
                 
             for key in creature_data.keys():
                 if key in self.creature.keys():
-                    self.creature[key].update(creature_data[key])
+                    if isinstance(self.creature[key],dict):
+                        self.creature[key].update(creature_data[key])
+                    else:
+                        self.creature[key] = creature_data[key]
+
                 else:
                     print(key + ' is not a valid input name')
     
