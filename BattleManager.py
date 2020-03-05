@@ -38,13 +38,13 @@ class BattleManager :
             #TODO: Add the ability to set initative in the json. This means checking to see if the field already exists, if not calculate it randomly
             #TODO: Sort ties by dexterity ability, if that's a tie, then ???
             
-#            newCreature["initiative"] = initRoll + int(newCreature["initiativeModifier"])
+        new_creature.state["initiative"] = initRoll + new_creature.stats["initiative_modifier"]
 #            print(newCreature["name"] + " rolled a " + str(initRoll) + " for its initiative resulting in a total of: " + str(newCreature["initiative"]))
 #            
 #            
-#            self.creatureList.append(new_creature)
+        self.creatureList.append(new_creature)
 #            
-#            self.creatureList = sorted(self.creatureList, key = lambda i: i["initiative"], reverse=True)
+        self.creatureList = sorted(self.creatureList, key = lambda i: i.state["initiative"], reverse=True)
             
 
             

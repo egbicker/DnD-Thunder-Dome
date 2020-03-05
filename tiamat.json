@@ -6,11 +6,7 @@
     
     "armor_class" : 25,
     
-    "initiative_modifier": 0,
-    
-    "armor_class" : 25,
-    
-    "hit_points" : {
+    "max_hit_points" : {
         "value" : "30d20 + 300",
         "method" : "average"
         },
@@ -29,10 +25,10 @@
             "charisma"     : 28
         },
         
-    "save_mod" : {
+    "save_mods" : {
             "strength"     : 19,
             "dexterity"    : 9,
-            "wisdom"       : 17
+            "wisdom"       : 17 
         },
     
     "skills" : {
@@ -47,19 +43,25 @@
         "fire"          : 0,
         "lightning"     : 0,
         "poison"        : 0,
-        "slashing_nm"   : 0,
-        "bludgeoning_nm" : 0,
-        "piercing_nm"    : 0
+        "slashing"      : [1,0],
+        "bludgeoning"   : [1,0],
+        "piercing"      : [1,0]
         },   
     
-    "condition_attributes" : {
-        "blinded"       : "Immune",
-        "charmed"       : "Immune",
-        "deafened"      : "Immune",
-        "frightened"    : "Immune",
-        "poisoned"      : "Immune",
-        "stunned"       : "Immune"
-        }
+    "conditions" : {
+        "blinded"       : 0,
+        "charmed"       : 0,
+        "deafened"      : 0,
+        "frightened"    : 0,
+        "poisoned"      : 0,
+        "stunned"       : 0
+        },
         
+    "senses" : {
+        "darkvision" : 240,
+        "truesight"  : 120
+        },
+
+    "languages" : ["common","draconic","infernal"]
 
 }
