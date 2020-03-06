@@ -7,12 +7,9 @@ Created on Fri Apr 26 16:59:13 2019
 
 import pdb
 
-import random
 from CreatureClass import Creature as cc
+import utils 
 
-#Roll a d20
-def d20Roll():
-    return random.randint(1,20)
     
 #This class handles scheduling and adding/removing monsters
 class BattleManager :
@@ -32,13 +29,13 @@ class BattleManager :
     def addCreature(self, input_file):
 
         new_creature = cc(input_file)
-        initRoll = d20Roll()
+        init_roll = utils.d20_roll()
                                                 
             #TODO: If no initiative modifier, use dex mod. If no dex mod, set warning and set mod to 0 or throw error?    
             #TODO: Add the ability to set initative in the json. This means checking to see if the field already exists, if not calculate it randomly
             #TODO: Sort ties by dexterity ability, if that's a tie, then ???
             
-        new_creature.state["initiative"] = initRoll + new_creature.stats["initiative_modifier"]
+        new_creature.state["initiative"] = init_roll + new_creature.stats["initiative_mod"]
 #            print(newCreature["name"] + " rolled a " + str(initRoll) + " for its initiative resulting in a total of: " + str(newCreature["initiative"]))
 #            
 #            
@@ -48,8 +45,3 @@ class BattleManager :
             
 
             
-BM = BattleManager()
-
-BM.addCreature("tiamat.json")
-
-print(BM.creatureList)

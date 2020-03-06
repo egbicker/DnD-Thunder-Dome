@@ -8,7 +8,7 @@
     
     "max_hit_points" : {
         "value" : "30d20 + 300",
-        "method" : "average"
+        "method" : "roll"
         },
         
     "movement" : {

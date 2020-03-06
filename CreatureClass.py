@@ -1,5 +1,6 @@
 import math
 import json
+import utils
 
 import pdb
 class Creature:
@@ -26,13 +27,13 @@ class Creature:
         #- armor_class: int, Defaults to 10 if not specified
         #- max_hit_points: dict
         #    - method: string, Defaulsts to 'Exact'
-        #       - Exact: Known and invariant (PC's), ignores hit dice 
-        #       - Average: Average of hit dice listed (monsters that have ndX hit dice)
-        #       - Normal: Take statistical draws on a given formula (monsters that have ndX hit dice)        
+        #       - exact: Known and invariant (PC's), ignores hit dice 
+        #       - average: Average of hit dice listed (monsters that have ndX hit dice)
+        #       - roll: Take statistical draws on a given formula (monsters that have ndX hit dice)        
         #    - value: string or int, Defaults to 1
-        #       - Exact: int, number of hp
-        #       - Average: string, hp code (ndY + X) where n is num hit die, Y is hit die type, X is flat
-        #       - Normal: string, hp code (ndY + X) where n is num hit die, Y is hit die type, X is flat
+        #       - exact: int, number of hp
+        #       - average: string, hp code (ndY + X) where n is num hit die, Y is hit die type, X is flat
+        #       - roll: string, hp code (ndY + X) where n is num hit die, Y is hit die type, X is flat
         #- movement: dict. All units in ft
         #    - land: int, defaults to 30
         #    - swim: int, defaults to 0
@@ -53,9 +54,7 @@ class Creature:
         #    - intelligence: int, defaults to modifier
         #    - wisdom: int, defaults to modifier       
         #    - charisma: int, defaults to modifier   
-        #- skills: Not Yet Implemented
-        #TODO: Skills
-        
+        #- skills: 
         self.stats = dict(
                 
                         #The creature's name
@@ -78,7 +77,7 @@ class Creature:
             
                         #Hit Points
                         max_hit_points = dict( 
-                                            method = 'Exact',
+                                            method = 'exact',
                                             value = 1),
 
                         #Movement types: land, swim, fly, climb, burrow
@@ -233,12 +232,23 @@ class Creature:
             
             #Current total intitiative. Used to determine order
             #Based on roll + self.stats[initiative_modifier]
-            initiative = []
+            initiative = [],
+            
+            current_hit_points = []
             )
         
         if input_file:
             self.parse_input_file(input_file)
             
+            self.calculate_att_mods()
+            self.calculate_save_mods()        
+            self.calculate_initiative_mod()
+            
+            self.initialize_hit_points()
+            
+            self.calculate_skill_mods()
+            self.calculate_passive_per()
+                    
 ###############################################################################
                 
 ###############################################################################        
@@ -261,14 +271,6 @@ class Creature:
             else:
                 print(key + ' is not a valid input name')
 
-        self.calculate_att_mods()
-        self.calculate_save_mods()        
-        self.calculate_initiative_mod()
-        
-        self.calculate_skill_mods()
-        self.calculate_passive_per()
-        
-        pdb.set_trace()
 
 ###############################################################################
                 
@@ -291,6 +293,22 @@ class Creature:
         for stat in self.stats["att_mods"].keys():
             if not self.stats["att_mods"][stat]:
                 self.stats["att_mods"][stat]=self.score2modifier(self.stats["att_scores"][stat])
+                
+###############################################################################
+                
+###############################################################################        
+    def initialize_hit_points(self):
+        
+        if self.stats["max_hit_points"]["method"] == "exact":
+            self.state["current_hit_points"] = int(self.stats["max_hit_points"]["value"])
+            
+        elif self.stats["max_hit_points"]["method"] == "average":
+            dice_vals = utils.evaluate_dice_string(self.stats["max_hit_points"]["value"])
+            self.state["current_hit_points"] = math.floor(dice_vals[0] * (dice_vals[1] + 1)/2) + dice_vals[2]
+            
+        elif self.stats["max_hit_points"]["method"] == "roll":
+            dice_vals = utils.evaluate_dice_string(self.stats["max_hit_points"]["value"])
+            self.state["current_hit_points"] = utils.roll_dice(dice_vals[0],dice_vals[1])[0] + dice_vals[2]
                 
 ###############################################################################
                 
